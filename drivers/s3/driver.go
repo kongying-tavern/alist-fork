@@ -15,7 +15,6 @@ import (
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
-	"github.com/gabriel-vasile/mimetype"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -138,17 +137,13 @@ func (d *S3) Put(ctx context.Context, dstDir model.Obj, stream model.FileStreame
 	}
 	key := getKey(stdpath.Join(dstDir.GetPath(), stream.GetName()), false)
 
-	mime, _ := mimetype.DetectReader(stream)
-	mimeName := mime.String()
-
 	log.Debugln("key:", key)
-	log.Debugln("content-type:", mimeName)
 
 	input := &s3manager.UploadInput{
 		Bucket:      &d.Bucket,
 		Key:         &key,
 		Body:        stream,
-		ContentType: &mimeName,
+		ContentType: &stream.Mimetype,
 	}
 	_, err := uploader.UploadWithContext(ctx, input)
 	return err
