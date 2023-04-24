@@ -148,7 +148,7 @@ func (d *S3) Put(ctx context.Context, dstDir model.Obj, stream model.FileStreame
 		Bucket:      &d.Bucket,
 		Key:         &key,
 		Body:        stream,
-		ContentType: mimeName,
+		ContentType: &mimeName,
 	}
 	_, err := uploader.UploadWithContext(ctx, input)
 	return err
