@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: |
           # sudo snap install zig --classic --beta
-          # go install github.com/crazy-max/xgo@latest
+          go install github.com/crazy-max/xgo@latest
 
       - name: Build
         run: |
