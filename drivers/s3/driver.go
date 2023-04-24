@@ -139,11 +139,12 @@ func (d *S3) Put(ctx context.Context, dstDir model.Obj, stream model.FileStreame
 
 	log.Debugln("key:", key)
 
+	mime := stream.GetMimetype()
 	input := &s3manager.UploadInput{
 		Bucket:      &d.Bucket,
 		Key:         &key,
 		Body:        stream,
-		ContentType: &stream.GetMimetype(),
+		ContentType: &mime,
 	}
 	_, err := uploader.UploadWithContext(ctx, input)
 	return err
