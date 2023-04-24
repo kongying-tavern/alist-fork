@@ -93,7 +93,7 @@ BuildRelease() {
     go build -o ./build/$appName-$os_arch -ldflags="$muslflags" -tags=jsoniter .
   done
   # BuildWinArm64 ./build/alist-windows-arm64.exe
-  xgo -out "$appName" -ldflags="$ldflags" -tags=jsoniter .
+  # xgo -out "$appName" -ldflags="$ldflags" -tags=jsoniter .
   # why? Because some target platforms seem to have issues with upx compression
   # upx -9 ./alist-linux-amd64
   # cp ./alist-windows-amd64.exe ./alist-windows-amd64-upx.exe
